@@ -1,16 +1,16 @@
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Task 1");
         int year = 2020;
         printTypeYear(year);
         System.out.println("Task 2");
-        String phone = "iOS";
-        int yearDevice = 2014;
-        checkPhoneSystem(phone);
-        printResultOfYear(yearDevice);
+        int systemPhone = 0;
+        int currentYear = LocalDate.now().getYear();
+        checkPhoneSystem(systemPhone,currentYear);
         System.out.println("Task3");
-        int distance = 10;
-        deliveryDistance(distance);
+        int distance = deliveryDistance(9);
     }
 
     public static boolean checkingTypeOfYear(int year) {
@@ -26,39 +26,33 @@ public class Main {
         }
     }
 
-    public static boolean clientDeviceYear(int year) {
-        return year > 2015;
-    }
-
-    public static void printResultOfYear(int year) {
-        if (clientDeviceYear(year)) {
+    public static void checkPhoneSystem(int systemPhone, int currentYear) {
+        if (systemPhone < 0 || systemPhone >1 ){
+            System.out.println("Такая система не поддерживается введите 0(iOS)  или 1(Android)");
+            return;
+        }
+        if (systemPhone==0) {
+            System.out.println("Система телефона iOS");
+        } else {
+            System.out.println("Система телефона Android");
+        }
+        if (currentYear > 2015) {
             System.out.println("Установите нормальную версию приложения по ссылке");
         } else {
-            System.out.println("Установите облегченную версию приложения  по ссылке");
+            System.out.println("Установите облегченную версию приложения по ссылке");
         }
     }
 
-    public static void checkPhoneSystem(String systemPhone) {
-        if (systemPhone.equals("Android")) {
-            System.out.println("Система телефона Android");
-        } else {
-            System.out.println("Система телефона iOS");
-        }
-    }
-
-    public static void deliveryDistance(int deliveryDistance) {
-        int deliveryDay = 0;
-        if (deliveryDistance <= 20) {
-            int delivery = deliveryDay + 1;
-            System.out.println("Для доставки потребуется дней: " + delivery);
-        } else if (deliveryDistance >= 20 && deliveryDistance <= 60) {
-            int delivery2 = deliveryDay + 2;
-            System.out.println("Для доставки потребуется дней: " + delivery2);
-        } else if (deliveryDistance >= 60 && deliveryDistance <= 100) {
-            int delivery3 = deliveryDay + 3;
-            System.out.println("Для доставки потребуется дней: " + delivery3);
+    public static int deliveryDistance(int distance) {
+        if (distance <= 20) {
+            System.out.println("Для доставки потребуется дней: 1" );
+        } else if (distance >= 20 && distance <= 60) {
+            System.out.println("Для доставки потребуется дней: 2");
+        } else if (distance >= 60 && distance <= 100) {
+            System.out.println("Для доставки потребуется дней: 3");
         } else {
             System.out.println("Свыше 100км доставки нет");
         }
+        return distance;
     }
 }
