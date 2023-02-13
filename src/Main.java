@@ -3,56 +3,54 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Task 1");
-        int year = 2020;
-        printTypeYear(year);
+        int year = 2040;
+        checkingTypeOfYear(year);
         System.out.println("Task 2");
-        int systemPhone = 0;
-        int currentYear = LocalDate.now().getYear();
-        checkPhoneSystem(systemPhone,currentYear);
+        checkPhoneSystem(0, 2014);
         System.out.println("Task3");
-        int distance = deliveryDistance(9);
+        int distance = 01;
+        int day = deliveryDistance(distance);
+        if (day == 1) {
+            System.out.println("Доставка в пределах 20 км занимает сутки");
+        } else if (day == 2) {
+            System.out.println("Доставка в пределах  от 20 км до 60 км занимает двое суток");
+        } else if (day == 3) {
+            System.out.println("Доставка в пределах от 60 км до 100 км занимает трое суток");
+        } else {
+            System.out.println("Свыше 100 км доставки нет");
+        }
     }
 
     public static boolean checkingTypeOfYear(int year) {
-        return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
-    }
-
-    public static void printTypeYear(int year) {
-        boolean leapYear = checkingTypeOfYear(year);
-        if (leapYear) {
+        if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
             System.out.println(year + " год — високосный год");
         } else {
             System.out.println(year + " год —  невисокосный год");
         }
+        return false;
     }
 
     public static void checkPhoneSystem(int systemPhone, int currentYear) {
-        if (systemPhone < 0 || systemPhone >1 ){
-            System.out.println("Такая система не поддерживается введите 0(iOS)  или 1(Android)");
-            return;
-        }
-        if (systemPhone==0) {
-            System.out.println("Система телефона iOS");
-        } else {
-            System.out.println("Система телефона Android");
-        }
-        if (currentYear > 2015) {
+        if (systemPhone == 0 && currentYear > 2015) {
+            System.out.println("Установите нормальную версию приложения для iOS по ссылке");
+        } else if (systemPhone == 0 && currentYear < 2015) {
+            System.out.println("Установите облегченную версию приложения для iOS по ссылке");
+        } else if (systemPhone == 1 && currentYear > 2015) {
             System.out.println("Установите нормальную версию приложения по ссылке");
-        } else {
-            System.out.println("Установите облегченную версию приложения по ссылке");
+        } else if (systemPhone == 1 && currentYear < 2015) {
+            System.out.println("Установите облегченную версию приложения для Android по ссылке");
         }
     }
 
     public static int deliveryDistance(int distance) {
+        int deliveryDay = 0;
         if (distance <= 20) {
-            System.out.println("Для доставки потребуется дней: 1" );
+            deliveryDay = deliveryDay+1;
         } else if (distance >= 20 && distance <= 60) {
-            System.out.println("Для доставки потребуется дней: 2");
+            deliveryDay = deliveryDay +2;
         } else if (distance >= 60 && distance <= 100) {
-            System.out.println("Для доставки потребуется дней: 3");
-        } else {
-            System.out.println("Свыше 100км доставки нет");
+            deliveryDay = deliveryDay+3;
         }
-        return distance;
+        return deliveryDay;
     }
 }
